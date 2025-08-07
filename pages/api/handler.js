@@ -5,10 +5,15 @@ export default async function handler(req, res) {
 
   const { name, email, contact } = req.body;
 
-  // Your validation here...
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const contactRegex = /^[89]\d{7}$/;
+
+  if (!name || !emailRegex.test(email) || !contactRegex.test(contact)) {
+    return res.status(400).json({ message: "Invalid data" });
+  }
 
   try {
-    const sheetUrl = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+    const sheetUrl = "https://script.google.com/macros/s/AKfycbyoSyXU6VdmD82O0y9k73DC5dZ-U1bxXA5eLLJrUo95LKmDDiep483PniJDcGwbX3KrJw/exec";
 
     const formData = new URLSearchParams({
       name,
