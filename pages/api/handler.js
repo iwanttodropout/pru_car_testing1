@@ -5,26 +5,26 @@ export default async function handler(req, res) {
 
   const { name, email, contact } = req.body;
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const contactRegex = /^[89]\d{7}$/;
-
-  if (!name || !emailRegex.test(email) || !contactRegex.test(contact)) {
-    return res.status(400).json({ message: "Invalid data" });
-  }
+  // Your validation here...
 
   try {
-    const sheetUrl = "https://script.google.com/macros/s/AKfycbyoSyXU6VdmD82O0y9k73DC5dZ-U1bxXA5eLLJrUo95LKmDDiep483PniJDcGwbX3KrJw/exec";
+    const sheetUrl = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+
+    const formData = new URLSearchParams({
+      name,
+      email,
+      contact,
+    });
 
     const response = await fetch(sheetUrl, {
       method: "POST",
-      body: JSON.stringify({ name, email, contact }),
+      body: formData.toString(),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
     });
 
     const data = await response.text();
-    console.log("Sheet response:", data);
 
     return res.status(200).json({ message: "Form submitted successfully!" });
   } catch (error) {
