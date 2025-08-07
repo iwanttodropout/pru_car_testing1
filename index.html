@@ -155,7 +155,7 @@
   <header data-aos="fade-down">
     <h1>Drive with Confidence — and a Fresh Ride</h1>
     <p>Unlock a <strong>FREE Aroma Diffuser</strong> when you purchase your car insurance with us.</p>
-    <button type="submit" id="submitBtn">Get My Freebie</button>
+    <a href="#quote-form" class="cta-button">Get My Freebie Now!</a>
   </header>
 
   <section class="benefits" data-aos="fade-up">
@@ -187,47 +187,35 @@
 
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
-
-    <form id="quoteForm" novalidate>
-  <input
-    type="text"
-    name="name"
-    id="name"
-    placeholder="Your Name"
-    required
-  />
-  <small class="error" id="nameError"></small>
-
-  <input
-    type="tel"
-    name="contact"
-    id="contact"
-    placeholder="Contact Number"
-    maxlength="8"
-    required
-    title="Enter a valid 8-digit number starting with 8 or 9"
-  />
-  <small class="error" id="contactError"></small>
-
-  <input
-    type="email"
-    name="email"
-    id="email"
-    placeholder="Email Address"
-    required
-    title="Enter a valid email address"
-  />
-  <small class="error" id="emailError"></small>
-
-  <input
-    type="text"
-    name="_gotcha"
-    style="display:none"
-  /> <!-- Anti-spam -->
-
-  <button type="submit" id="submitBtn">Get My Freebie</button>
-  <div id="loading" style="display:none; margin-top: 10px;">⏳ Submitting...</div>
-</form>
+    <form id="quoteForm">
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+      />
+      <input
+        type="tel"
+        name="contact"
+        placeholder="Contact Number"
+        maxlength="8"
+        required
+        title="Enter a valid 8-digit number starting with 8 or 9"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email Address"
+        required
+        title="Enter a valid email address"
+      />
+      <input
+        type="text"
+        name="_gotcha"
+        style="display:none"
+      /> <!-- Anti-spam -->
+      <button type="submit">Get My Freebie</button>
+    </form>
     <p class="disclaimer">*We respect your privacy. No spam, ever.</p>
   </section>
 
@@ -267,60 +255,17 @@
       }
       requestAnimationFrame(animation);
     });
-    
-const submitBtn = document.getElementById('submitBtn');
 
-document.getElementById('quoteForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
+    // Form submission handler
+    document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
 
-  // Show loading on button
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting... ⏳';
-
-  const form = e.target;
-  const formData = {
-    name: form.name.value,
-    contact: form.contact.value,
-    email: form.email.value,
-  };
-
-  try {
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      alert('Thanks for signing up! We will be in touch.');
-      form.reset();
-    } else {
-      alert('Oops! Something went wrong. Try again later.');
-    }
-  } catch (error) {
-    alert('Network error, please try again.');
-  } finally {
-    // Reset button text and enable it
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Get My Freebie';
-  }
-});
-
-    if (res.ok) {
-      alert('Thanks for signing up! We will be in touch.');
-      form.reset();
-    } else {
-      alert('Oops! Something went wrong. Try again later.');
-    }
-  } catch (error) {
-    alert('Network error, please try again.');
-  } finally {
-    // Hide loading spinner & enable button
-    loading.style.display = 'none';
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Get My Freebie';
-  }
-});
+      const form = e.target;
+      const formData = {
+        name: form.name.value,
+        contact: form.contact.value,
+        email: form.email.value,
+      };
 
       try {
         const res = await fetch('/api/submit', {
