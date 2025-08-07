@@ -1,26 +1,34 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
+document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitBtn = document.getElementById('submitButton'); 
+  submitBtn.disabled = true; 
+  submitBtn.textContent = 'Submitting...'; 
+
+  const formData = {
+    name: form.name.value,
+    contact: form.contact.value,
+    email: form.email.value,
+  };
+
+  try {
+    const response = await fetch('https://script.google.com/macros/s/your-web-app-url/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      alert('Submission successful!');
+      form.reset();
+    } else {
+      alert('Something went wrong. Please try again later.');
+    }
+  } catch (error) {
+    alert('Network error. Please try again later.');
   }
 
-  const { name, email, contact } = req.body;
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const contactRegex = /^[89]\d{7}$/;
-
-  if (
-    !name ||
-    !email ||
-    !contact ||
-    !emailRegex.test(email) ||
-    !contactRegex.test(contact)
-  ) {
-    return res.status(400).json({ message: "Invalid data" });
-  }
-
-  console.log("Contact form submitted:", { name, email, contact });
-
-  // TODO: Add your email sending or DB saving logic here
-
-  return res.status(200).json({ message: "Form received successfully!" });
-}
+  submitBtn.disabled = false; 
+  submitBtn.textContent = 'Get My Freebie'; 
+});
