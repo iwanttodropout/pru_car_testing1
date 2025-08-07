@@ -206,9 +206,9 @@
     <p>Our sleek aroma diffuser adds that luxe, spa-like feel to your car. Yours is <strong>FREE</strong> when you purchase your insurance today.</p>
   </section>
 
-  document.getElementById('contactForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
+ <form action="/api/submit" method="POST">
+  <!-- your inputs -->
+</form>
   const form = e.target;
   const data = {
     name: form.name.value.trim(),
