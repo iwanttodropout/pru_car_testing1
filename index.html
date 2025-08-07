@@ -206,32 +206,43 @@
     <p>Our sleek aroma diffuser adds that luxe, spa-like feel to your car. Yours is <strong>FREE</strong> when you purchase your insurance today.</p>
   </section>
 
- <form action="/api/submit" method="POST">
-  <section id="quote-form" data-aos="zoom-in">
-    <h2 class="section-title">Let’s Get Started!</h2>
-    <form id="contactForm" method="POST" action="/api/submit">
-      <input type="text" name="name" placeholder="Your Name" required />
-   <input
-  type="tel"
-  name="contact"
-  placeholder="Contact Number"
-  required
-  maxlength="8"
-  pattern="^[89]\d{7}$"
-  title="Contact number must be 8 digits and start with 8 or 9"
-/>
-      <input
-        type="email"
-        name="email"
-        placeholder="Email Address"
-        required
-        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-        title="Enter a valid email address"
-      />
-      <button type="submit">Get My Freebie</button>
-    </form>
-    <p class="disclaimer">*We respect your privacy. No spam, ever.</p>
-  </section>
+<form id="contact-form">
+  <input type="text" name="name" placeholder="Name" required />
+  <input type="email" name="email" placeholder="Email" required />
+  <input
+    type="tel"
+    name="contact"
+    placeholder="Contact Number"
+    required
+    maxlength="8"
+    pattern="^[89]\d{7}$"
+  />
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert("Form submitted successfully!");
+    } else {
+      alert("Error: " + result.message);
+    }
+  });
+</script>
 
   <script>
     // Scroll progress bar
