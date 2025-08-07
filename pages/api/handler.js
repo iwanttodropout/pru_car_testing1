@@ -1,4 +1,3 @@
-// Form submission handler
 document.getElementById('quoteForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
