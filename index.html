@@ -217,7 +217,7 @@
         placeholder="Contact Number"
         required
         maxlength="8"
-        pattern="^[89]\d{8}$"
+        pattern="^[89]\d{7}$"
         title="Contact number must be 8 digits and start with 8 or 9"
       />
       <input
@@ -283,7 +283,7 @@
       };
 
       // Client-side validation
-      if (!/^[89]\d{8}$/.test(data.contact)) {
+      if (!/^[89]\d{7}$/.test(data.contact)) {
         alert("Contact number must be 8 digits and start with 8 or 9.");
         return;
       }
