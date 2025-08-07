@@ -2,332 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Car Insurance + Free Diffuser</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-  
-  <!-- AOS CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insurance Quote</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    * {
-      box-sizing: border-box;
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: url('https://www.transparenttextures.com/patterns/diagonal-noise.png');
-      background-color: #f3f3fb;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header, section, footer {
-      padding: 2rem 1rem;
-      max-width: 800px;
-      margin: auto;
     }
 
     header {
-      background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+      background-color: #242582;
+      padding: 1rem;
       text-align: center;
-      padding: 3rem 1rem;
+      color: white;
     }
 
-    header h1 {
-      font-size: 2.5rem;
+    .container {
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h2 {
       margin-bottom: 1rem;
-    }
-
-    header p {
-      font-size: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .cta-button {
-      background-color: #000;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      animation: pulse 1.8s infinite;
-      display: inline-block;
-      transition: 0.3s ease;
-    }
-
-    .cta-button:hover {
-      background-color: #ffcc00;
-      color: #000;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 204, 0, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
-    }
-
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .benefits ul {
-      list-style: none;
-      padding-left: 1rem;
-    }
-
-    .benefits li::before {
-      content: '✅';
-      margin-right: 0.5rem;
-    }
-
-    .visual {
-      position: relative;
-    }
-
-    .visual img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      margin: 1rem 0;
-    }
-
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      padding: 0.4rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .visual-image-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
     }
 
     form input, form button {
+      display: block;
+      width: 100%;
       padding: 0.75rem;
+      margin-bottom: 1rem;
       font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      transition: 0.3s ease;
-    }
-
-    form input:focus, form button:hover {
-      outline: none;
-      border-color: #8ec5fc;
-      box-shadow: 0 0 8px #8ec5fc44;
     }
 
     form button {
-      background-color: #ffcc00;
+      background-color: #242582;
+      color: white;
       border: none;
-      color: #000;
-      font-weight: bold;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
-    .disclaimer {
-      font-size: 0.85rem;
-      color: #777;
-      margin-top: 0.5rem;
+    form button:hover {
+      background-color: #504bae;
     }
 
-    /* Scroll Progress Bar */
-    #progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: #8ec5fc;
-      width: 0%;
-      z-index: 999;
-      transition: width 0.2s ease;
+    .cta-button {
+      background-color: #f64c72;
+      padding: 0.75rem 1rem;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background-color: #ff6f91;
     }
   </style>
 </head>
-<body>
-  <!-- Scroll Progress Bar -->
-  <div id="progress-bar"></div>
 
-  <header data-aos="fade-down">
-    <h1>Drive with Confidence — and a Fresh Ride</h1>
-    <p>Unlock a <strong>FREE Aroma Diffuser</strong> when you purchase your car insurance with us.</p>
-    <a href="#quote-form" class="cta-button">Get My Freebie Now!</a>
+<body>
+  <header>
+    <h1>Get Your Free Car Insurance Quote</h1>
   </header>
 
-  <section class="benefits" data-aos="fade-up">
-    <h2 class="section-title">We’ve Got Your Back on the Road</h2>
-    <p>Car insurance in Singapore is mandatory — but that doesn't mean it has to be boring. Get covered for accidents, theft, and more, while enjoying flexible workshops and lightning-fast claims. Easy, breezy, fully protected.</p>
-    <ul>
-      <li>Comprehensive coverage</li>
-      <li>24/7 claims support</li>
-      <li>Save more with tailored plans</li>
-      <li>Instant quotes, zero stress</li>
-    </ul>
-  </section>
+  <div class="container">
+    <a href="#quote-form" class="cta-button">Get My Freebie Now!</a>
 
-  <section class="visual" data-aos="fade-up">
-    <h2 class="section-title">✨ Luxury Scents. Anywhere. Anytime.</h2>
-    <p>Meet the <strong>QIS Cold Diffuser (worth up to $189)</strong> – your silent, sleek scent companion. No water, no heat — just pure essential oils diffused like a boss. Perfect for your car, home, office, or even your throne room (aka bathroom).</p>
-    <ul>
-      <li>💨 <strong>Cold diffusion tech</strong> = zero aroma loss</li>
-      <li>🔋 <strong>USB rechargeable</strong> & travel-ready</li>
-      <li>😌 <strong>Whisper-quiet</strong>, ultra-chic</li>
-      <li>🧴 <strong>Refillable 10ml chamber</strong></li>
-    </ul>
-    <div class="visual-image-wrapper">
-      <span class="badge">Worth $189 🔥</span>
-      <img src="https://iwanttodropout.github.io/pru-car/diffuser.png" alt="Diffuser" style="width: 100%; max-width: 400px;" />
-    </div>
-    <p>Our sleek aroma diffuser adds that luxe, spa-like feel to your car. Yours is <strong>FREE</strong> when you purchase your insurance today.</p>
-  </section>
+    <h2 id="quote-form">Request a Quote</h2>
+    <form id="contact-form">
+      <input type="text" name="name" placeholder="Full Name" required />
 
-  <h1>Contact Us</h1>
+      <input type="tel" name="contact" placeholder="Mobile Number (8 or 9 start)" 
+             pattern="^[89][0-9]{7}$" 
+             title="Must be 8 digits starting with 8 or 9" required />
 
-  <form id="contact-form">
-    <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
 
-    <input
-      type="email"
-      name="email"
-      placeholder="Email"
-      required
-      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-    />
-
-    <input
-      type="tel"
-      name="contact"
-      placeholder="Contact Number (8 digits, starts with 8 or 9)"
-      required
-      maxlength="8"
-      pattern="^[89][0-9]{7}$"
-    />
-
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
   <script>
-    const form = document.getElementById("contact-form");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-
-        const result = await res.json();
-
-        if (!res.ok) {
-          alert("Error: " + result.message);
-        } else {
-          alert("Thank you! We'll reach out to you soon 🎉");
-          form.reset();
-        }
-      } catch (err) {
-        console.error("Submit error:", err);
-        alert("Something went wrong. Please try again.");
-      }
-    });
-  </script>
-  
-<script>
-  const form = document.getElementById("contact-form");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      alert("Thanks for submitting! We’ll reach out soon ✨");
-    } else {
-      alert("Oops! " + result.message);
-    }
-  });
-</script>
-
-  <script>
-    // Scroll progress bar
-    window.onscroll = function () {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById("progress-bar").style.width = scrolled + "%";
-    };
-
-    // Smooth scroll animation for CTA
-    document.querySelector('.cta-button').addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector('#quote-form');
-      const startPosition = window.pageYOffset;
-      const targetPosition = target.getBoundingClientRect().top + startPosition;
-      const distance = targetPosition - startPosition;
-      const duration = 1450;
-      let start = null;
-
-      function easeInOutQuad(t, b, c, d) {
-        t /= d/2;
-        if (t < 1) return c/2*t*t + b;
-        t--;
-        return -c/2 * (t*(t-2) - 1) + b;
-      }
-
-      function animation(currentTime) {
-        if (start === null) start = currentTime;
-        const timeElapsed = currentTime - start;
-        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      }
-      requestAnimationFrame(animation);
-    });
-  </script>
-
-  <script>
-    // Validation + submit handler
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const form = e.target;
@@ -337,12 +100,13 @@
         email: form.email.value.trim()
       };
 
-      // Client-side validation
+      // Validate contact number
       if (!/^[89]\d{7}$/.test(data.contact)) {
         alert("Contact number must be 8 digits and start with 8 or 9.");
         return;
       }
 
+      // Validate email format
       if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(data.email)) {
         alert("Please enter a valid email address.");
         return;
@@ -356,25 +120,16 @@
         });
 
         if (response.ok) {
-          alert('Thanks! Your details have been received. We will reach out soon.');
+          alert('✅ We got your details! Expect to hear from us soon.');
           form.reset();
         } else {
-          alert('Oops! Something went wrong. Please try again later.');
+          const result = await response.json();
+          alert('🚫 Error: ' + result.message);
         }
       } catch (error) {
-        alert('Network error. Please try again later.');
+        alert('⚠️ Something went wrong. Please try again later.');
       }
     });
   </script>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>AOS.init();</script>
-</body>
-</html>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>AOS.init();</script>
 </body>
 </html>
