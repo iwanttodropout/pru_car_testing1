@@ -12,6 +12,13 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <style>
+    .error {
+  color: #e63946;
+  font-size: 0.8rem;
+  height: 1em;
+  margin-top: 2px;
+  display: block;
+}
     /* Your original styles, unchanged */
     * {
       box-sizing: border-box;
@@ -187,35 +194,47 @@
 
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
-    <form id="quoteForm">
-      <input
-        type="text"
-        name="name"
-        placeholder="Your Name"
-        required
-      />
-      <input
-        type="tel"
-        name="contact"
-        placeholder="Contact Number"
-        maxlength="8"
-        required
-        title="Enter a valid 8-digit number starting with 8 or 9"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email Address"
-        required
-        title="Enter a valid email address"
-      />
-      <input
-        type="text"
-        name="_gotcha"
-        style="display:none"
-      /> <!-- Anti-spam -->
-      <button type="submit">Get My Freebie</button>
-    </form>
+
+    <form id="quoteForm" novalidate>
+  <input
+    type="text"
+    name="name"
+    id="name"
+    placeholder="Your Name"
+    required
+  />
+  <small class="error" id="nameError"></small>
+
+  <input
+    type="tel"
+    name="contact"
+    id="contact"
+    placeholder="Contact Number"
+    maxlength="8"
+    required
+    title="Enter a valid 8-digit number starting with 8 or 9"
+  />
+  <small class="error" id="contactError"></small>
+
+  <input
+    type="email"
+    name="email"
+    id="email"
+    placeholder="Email Address"
+    required
+    title="Enter a valid email address"
+  />
+  <small class="error" id="emailError"></small>
+
+  <input
+    type="text"
+    name="_gotcha"
+    style="display:none"
+  /> <!-- Anti-spam -->
+
+  <button type="submit" id="submitBtn">Get My Freebie</button>
+  <div id="loading" style="display:none; margin-top: 10px;">⏳ Submitting...</div>
+</form>
     <p class="disclaimer">*We respect your privacy. No spam, ever.</p>
   </section>
 
@@ -256,16 +275,95 @@
       requestAnimationFrame(animation);
     });
 
-    // Form submission handler
-    document.getElementById('quoteForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
+const form = document.getElementById('quoteForm');
+const submitBtn = document.getElementById('submitBtn');
+const loading = document.getElementById('loading');
 
-      const form = e.target;
-      const formData = {
-        name: form.name.value,
-        contact: form.contact.value,
-        email: form.email.value,
-      };
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const contactInput = document.getElementById('contact');
+
+const nameError = document.getElementById('nameError');
+const emailError = document.getElementById('emailError');
+const contactError = document.getElementById('contactError');
+
+function validate() {
+  let valid = true;
+
+  // Reset errors
+  nameError.textContent = '';
+  emailError.textContent = '';
+  contactError.textContent = '';
+
+  // Name validation
+  if (!nameInput.value.trim()) {
+    nameError.textContent = 'Name is required.';
+    valid = false;
+  }
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailInput.value.trim()) {
+    emailError.textContent = 'Email is required.';
+    valid = false;
+  } else if (!emailRegex.test(emailInput.value)) {
+    emailError.textContent = 'Email is invalid.';
+    valid = false;
+  }
+
+  // Contact validation
+  const contactRegex = /^[89]\d{7}$/;
+  if (!contactInput.value.trim()) {
+    contactError.textContent = 'Contact is required.';
+    valid = false;
+  } else if (!contactRegex.test(contactInput.value)) {
+    contactError.textContent = 'Contact must start with 8 or 9 and be 8 digits.';
+    valid = false;
+  }
+
+  return valid;
+}
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  if (!validate()) {
+    return; // stop submit if invalid
+  }
+
+  // Show loading spinner & disable button
+  loading.style.display = 'block';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+
+  const formData = {
+    name: nameInput.value.trim(),
+    contact: contactInput.value.trim(),
+    email: emailInput.value.trim(),
+  };
+
+  try {
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      alert('Thanks for signing up! We will be in touch.');
+      form.reset();
+    } else {
+      alert('Oops! Something went wrong. Try again later.');
+    }
+  } catch (error) {
+    alert('Network error, please try again.');
+  } finally {
+    // Hide loading spinner & enable button
+    loading.style.display = 'none';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Get My Freebie';
+  }
+});
 
       try {
         const res = await fetch('/api/submit', {
