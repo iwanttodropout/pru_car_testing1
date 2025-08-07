@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
   console.log("Contact form submitted:", { name, email, contact });
 
-  // Do stuff here: send email, save to DB, etc
+  // TODO: Add your email sending or DB saving logic here
 
   return res.status(200).json({ message: "Form received successfully!" });
 }
