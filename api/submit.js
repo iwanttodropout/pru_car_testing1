@@ -18,8 +18,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: "Invalid data" });
   }
 
-  // Optional: do something with the data (send email, log to DB, etc.)
-  console.log("Received form:", { name, email, contact });
+  console.log("Contact form submitted:", { name, email, contact });
+
+  // Do stuff here: send email, save to DB, etc
 
   return res.status(200).json({ message: "Form received successfully!" });
 }
