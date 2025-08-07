@@ -5,6 +5,7 @@ export default async function handler(req, res) {
 
   const { name, email, contact } = req.body;
 
+  // Validation regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const contactRegex = /^[89]\d{7}$/;
 
@@ -29,9 +30,11 @@ export default async function handler(req, res) {
       },
     });
 
-    const data = await response.text();
-
-    return res.status(200).json({ message: "Form submitted successfully!" });
+    if (response.ok) {
+      return res.status(200).json({ message: "Form submitted successfully!" });
+    } else {
+      return res.status(500).json({ message: "Failed to submit form" });
+    }
   } catch (error) {
     console.error("Error submitting to Google Sheets:", error);
     return res.status(500).json({ message: "Server error. Please try again later." });
