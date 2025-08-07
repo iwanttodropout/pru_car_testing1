@@ -13,8 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Replace with YOUR deployed Apps Script URL
-    const sheetUrl = "https://script.google.com/macros/s/AKfycbyLCWQRKRQvI1s5xQrEpgnoP3fZ8KrfKQH_EcrRzOopHdFW2_D5nLAJxE_TSNFHqn1RPg/exec";
+    const sheetUrl = "https://script.google.com/macros/s/AKfycbyoSyXU6VdmD82O0y9k73DC5dZ-U1bxXA5eLLJrUo95LKmDDiep483PniJDcGwbX3KrJw/exec";
 
     const response = await fetch(sheetUrl, {
       method: "POST",
