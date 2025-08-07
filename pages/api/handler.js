@@ -2,9 +2,9 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   e.preventDefault();
 
   const form = e.target;
-  const submitBtn = document.getElementById('submitButton'); // 👈 Add this
-  submitBtn.disabled = true; // 👈 Disable button
-  submitBtn.textContent = 'Submitting...'; // 👈 Show loading
+  const submitBtn = document.getElementById('submitButton'); 
+  submitBtn.disabled = true; 
+  submitBtn.textContent = 'Submitting...'; 
 
   const formData = {
     name: form.name.value,
@@ -29,6 +29,6 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     alert('Network error. Please try again later.');
   }
 
-  submitBtn.disabled = false; // 👈 Re-enable button
-  submitBtn.textContent = 'Get My Freebie'; // 👈 Reset text
+  submitBtn.disabled = false; 
+  submitBtn.textContent = 'Get My Freebie'; 
 });
