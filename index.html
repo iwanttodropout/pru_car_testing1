@@ -208,15 +208,24 @@
 
 <form id="contact-form">
   <input type="text" name="name" placeholder="Name" required />
-  <input type="email" name="email" placeholder="Email" required />
+
+  <input
+    type="email"
+    name="email"
+    placeholder="Email"
+    required
+    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  />
+
   <input
     type="tel"
     name="contact"
     placeholder="Contact Number"
     required
     maxlength="8"
-    pattern="^[89]\d{7}$"
+    pattern="^[89][0-9]{7}$"
   />
+
   <button type="submit">Submit</button>
 </form>
 
@@ -237,9 +246,9 @@
 
     const result = await response.json();
     if (response.ok) {
-      alert("Form submitted successfully!");
+      alert("Thanks for submitting! We’ll reach out soon ✨");
     } else {
-      alert("Error: " + result.message);
+      alert("Oops! " + result.message);
     }
   });
 </script>
