@@ -8,9 +8,10 @@ export default async function handler(req, res) {
 
   const { name, email, contact } = req.body;
 
+  // Make sure 'from' is a verified sender
   const msg = {
-    to: email,
-    from: 'youremail@yourdomain.com', // replace with your verified SendGrid sender
+    to: email, 
+    from: 'verified_sender@yourdomain.com', // must be verified in SendGrid
     subject: 'Thanks for your submission!',
     html: `
       <p>Hi <strong>${name}</strong>,</p>
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
     await sgMail.send(msg);
     res.status(200).json({ message: 'Thanks for signing up! We will be in touch.' });
   } catch (error) {
-    console.error(error);
+    console.error('SendGrid error:', error);
     res.status(500).json({ message: 'Email failed to send.' });
   }
 }
