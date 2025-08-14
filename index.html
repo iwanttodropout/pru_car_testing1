@@ -90,10 +90,10 @@
 
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
-    <form id="quoteForm" novalidate>
-      <input type="text" name="name" placeholder="Your Name" />
-      <input type="text" name="contact" placeholder="Contact Number" />
-      <input type="text" name="email" placeholder="Email Address" />
+    <form id="quoteForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="tel" name="contact" placeholder="Contact Number" maxlength="8" required title="Enter a valid 8-digit number starting with 8 or 9" />
+      <input type="email" name="email" placeholder="Email Address" required title="Enter a valid email address" />
       <input type="text" name="_gotcha" style="display:none" />
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
       <button id="submitButton" type="submit">Submit</button>
@@ -139,9 +139,10 @@
       requestAnimationFrame(animation);
     });
 
-    // Custom validation + form submit
+    // Combined form submission: GAS + SendGrid
     document.getElementById("quoteForm").addEventListener("submit", async function(e) {
       e.preventDefault();
+
       const form = e.target;
       const name = form.name.value.trim();
       const email = form.email.value.trim();
@@ -157,27 +158,33 @@
         errorMsg.textContent = "Please enter valid info in all fields!";
         return;
       }
-
       errorMsg.style.display = "none";
+
       button.disabled = true;
       button.classList.add("loading");
       button.textContent = "Submitting...";
 
       try {
-        const res = await fetch("/api/submit.js", {
+        // GAS submission
+        const res = await fetch("/api/handler", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, contact })
+          body: JSON.stringify({ name, email, contact }),
         });
-
         const result = await res.json();
+        if (!res.ok) throw new Error(result.message || "Submission to Sheets failed.");
 
-        if (res.ok) {
-          alert("Form submitted successfully!");
-          form.reset();
-        } else {
-          throw new Error(result.message || "Submission failed.");
-        }
+        // SendGrid email
+        const emailRes = await fetch("/api/sendgrid", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, contact }),
+        });
+        const emailResult = await emailRes.json();
+        if (!emailRes.ok) throw new Error(emailResult.message || "Email sending failed.");
+
+        alert("Form submitted! Check your email for confirmation.");
+        form.reset();
       } catch (err) {
         errorMsg.style.display = "block";
         errorMsg.textContent = err.message;
