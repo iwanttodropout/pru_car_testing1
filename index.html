@@ -92,7 +92,7 @@
     <h2 class="section-title">Let’s Get Started!</h2>
     <form id="quoteForm">
       <input type="text" name="name" placeholder="Your Name" required />
-      <input type="tel" name="contact" placeholder="Contact Number" maxlength="8" required title="Enter a valid 8-digit number starting with 8 or 9" />
+      <input type="tel" name="contact" placeholder="Contact Number" maxlength="8" pattern="[89][0-9]{7}" required title="Enter a valid 8-digit number starting with 8 or 9" />
       <input type="email" name="email" placeholder="Email Address" required title="Enter a valid email address" />
       <input type="text" name="_gotcha" style="display:none" />
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
