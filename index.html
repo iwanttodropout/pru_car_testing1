@@ -91,10 +91,9 @@
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
     <form id="quoteForm">
-      <!-- Changed types to text to avoid pattern errors -->
       <input type="text" name="name" placeholder="Your Name" required />
-      <input type="text" name="contact" placeholder="Contact Number" maxlength="8" required title="Enter an 8-digit number starting with 8 or 9" />
-      <input type="text" name="email" placeholder="Email Address" required title="Enter a valid email address" />
+      <input type="text" name="contact" placeholder="Contact Number" required />
+      <input type="text" name="email" placeholder="Email Address" required />
       <input type="text" name="_gotcha" style="display:none" />
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
       <button id="submitButton" type="submit">Submit</button>
@@ -140,10 +139,9 @@
       requestAnimationFrame(animation);
     });
 
-    // Your existing JS validation & submission
+    // Existing JS validation and submit logic
     document.getElementById("quoteForm").addEventListener("submit", async function (e) {
       e.preventDefault();
-
       const form = e.target;
       const name = form.name.value.trim();
       const email = form.email.value.trim();
@@ -151,6 +149,7 @@
       const errorMsg = document.getElementById("errorMsg");
       const button = document.getElementById("submitButton");
 
+      // Inline validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const contactRegex = /^[89]\d{7}$/;
 
@@ -162,6 +161,7 @@
 
       errorMsg.style.display = "none";
 
+      // Show loading
       button.disabled = true;
       button.classList.add("loading");
       button.textContent = "Submitting...";
