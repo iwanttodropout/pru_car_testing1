@@ -92,8 +92,8 @@
     <h2 class="section-title">Let’s Get Started!</h2>
     <form id="quoteForm" novalidate>
       <input type="text" name="name" placeholder="Your Name" required />
-      <input type="text" name="contact" placeholder="Contact Number" required />
-      <input type="text" name="email" placeholder="Email Address" required />
+      <input type="text" name="contact" placeholder="Contact Number" required title="Enter a valid 8-digit number starting with 8 or 9" />
+      <input type="text" name="email" placeholder="Email Address" required title="Enter a valid email address" />
       <input type="text" name="_gotcha" style="display:none" />
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
       <button id="submitButton" type="submit">Submit</button>
@@ -139,7 +139,7 @@
       requestAnimationFrame(animation);
     });
 
-    // Your existing JS form submission
+    // Form submission with validation
     document.getElementById("quoteForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
@@ -150,7 +150,6 @@
       const errorMsg = document.getElementById("errorMsg");
       const button = document.getElementById("submitButton");
 
-      // Inline validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const contactRegex = /^[89]\d{7}$/;
 
@@ -162,17 +161,14 @@
 
       errorMsg.style.display = "none";
 
-      // Show loading
       button.disabled = true;
       button.classList.add("loading");
       button.textContent = "Submitting...";
 
       try {
-        const res = await fetch("/api/handler", {
+        const res = await fetch("/api/submit", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, email, contact }),
         });
 
