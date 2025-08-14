@@ -91,9 +91,9 @@
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
     <form id="quoteForm" novalidate>
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="text" name="contact" placeholder="Contact Number" required title="Enter a valid 8-digit number starting with 8 or 9" />
-      <input type="text" name="email" placeholder="Email Address" required title="Enter a valid email address" />
+      <input type="text" name="name" placeholder="Your Name" />
+      <input type="text" name="contact" placeholder="Contact Number" />
+      <input type="text" name="email" placeholder="Email Address" />
       <input type="text" name="_gotcha" style="display:none" />
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
       <button id="submitButton" type="submit">Submit</button>
@@ -139,10 +139,9 @@
       requestAnimationFrame(animation);
     });
 
-    // Form submission with validation
-    document.getElementById("quoteForm").addEventListener("submit", async function (e) {
+    // Custom validation + form submit
+    document.getElementById("quoteForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-
       const form = e.target;
       const name = form.name.value.trim();
       const email = form.email.value.trim();
@@ -160,22 +159,21 @@
       }
 
       errorMsg.style.display = "none";
-
       button.disabled = true;
       button.classList.add("loading");
       button.textContent = "Submitting...";
 
       try {
-        const res = await fetch("/api/submit", {
+        const res = await fetch("/api/submit.js", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, contact }),
+          body: JSON.stringify({ name, email, contact })
         });
 
         const result = await res.json();
 
         if (res.ok) {
-          alert("Form submitted!");
+          alert("Form submitted successfully!");
           form.reset();
         } else {
           throw new Error(result.message || "Submission failed.");
