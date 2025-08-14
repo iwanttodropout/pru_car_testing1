@@ -26,22 +26,9 @@ document.getElementById("quoteForm").addEventListener("submit", async function (
   button.textContent = "Submitting...";
 
   try {
-    const res = await fetch("/api/handler", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, contact }),
-    });
-
-    const result = await res.json();
-
-    if (res.ok) {
-      alert("Form submitted!");
-      form.reset();
-    } else {
-      throw new Error(result.message || "Submission failed.");
-    }
+    // Just alert for now (or send to your GAS if you had that)
+    alert("Form submitted! Thanks, " + name);
+    form.reset();
   } catch (err) {
     errorMsg.style.display = "block";
     errorMsg.textContent = err.message;
