@@ -22,8 +22,11 @@
       scroll-behavior: smooth;
     }
     body {
-      background: url('https://www.transparenttextures.com/patterns/diagonal-noise.png');
-      background-color: #f3f3fb;
+      background: linear-gradient(rgba(243,243,251,0.9), rgba(243,243,251,0.9)),
+                  url('https://images.unsplash.com/photo-1502877338535-766e1452684a');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: #333;
       line-height: 1.6;
     }
@@ -36,6 +39,7 @@
       background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
       text-align: center;
       padding: 3rem 1rem;
+      border-radius: 12px;
     }
     header h1 {
       font-size: 2.5rem;
@@ -134,6 +138,19 @@
       color: #777;
       margin-top: 0.5rem;
     }
+    .pdpa {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+    .pdpa a {
+      color: #8ec5fc;
+      text-decoration: none;
+    }
+    .pdpa a:hover {
+      text-decoration: underline;
+    }
     /* Scroll Progress Bar */
     #progress-bar {
       position: fixed;
@@ -164,7 +181,7 @@
       <li>Comprehensive coverage</li>
       <li>24/7 claims support</li>
       <li>Save more with tailored plans</li>
-      <li>Instant quotes, zero stress</li>
+      <li>Competitive quotes, zero stress</li>
     </ul>
   </section>
 
@@ -181,42 +198,24 @@
       <span class="badge">Worth $189 🔥</span>
       <img src="https://iwanttodropout.github.io/pru-car/diffuser.png" alt="Diffuser" style="width: 100%; max-width: 400px;" />
     </div>
-    <p>Our sleek aroma diffuser adds that luxe, spa-like feel to your car. Yours is <strong>FREE</strong> when you purchase your insurance today.</p>
+    <p>Our sleek aroma diffuser adds that luxe, spa-like feel to your car. Yours is <strong>FREE</strong> when you purchase your insurance with us</p>
   </section>
 
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
     <form id="quoteForm">
-      <input
-        type="text"
-        name="name"
-        placeholder="Your Name"
-        required
-      />
-      <input
-        type="tel"
-        name="contact"
-        placeholder="Contact Number"
-        maxlength="8"
-        required
-        title="Enter a valid 8-digit number starting with 8 or 9"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email Address"
-        required
-        title="Enter a valid email address"
-      />
-      <input
-        type="text"
-        name="_gotcha"
-        style="display:none"
-      /> <!-- Anti-spam -->
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="tel" name="contact" placeholder="Contact Number" maxlength="8" required title="Enter a valid 8-digit number starting with 8 or 9" />
+      <input type="email" name="email" placeholder="Email Address" required title="Enter a valid email address" />
+      <input type="text" name="_gotcha" style="display:none" /> <!-- Anti-spam -->
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
       <button id="submitButton" type="submit">Submit</button>
     </form>
     <p class="disclaimer">*We respect your privacy. No spam, ever.</p>
+    <p class="pdpa">
+      By submitting this form, you consent to the collection, use, and disclosure of your personal data in accordance with our 
+      <a href="#" target="_blank">Privacy Policy</a>, and the Personal Data Protection Act (PDPA).
+    </p>
   </section>
 
   <!-- Scripts -->
