@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <style>
-    /* <-- Everything unchanged from your current design --> */
+    /* ==== ALL YOUR CURRENT STYLES, EXACTLY === */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
@@ -63,11 +63,30 @@
   </header>
 
   <section class="benefits" data-aos="fade-up">
-    <!-- Benefits section unchanged -->
+    <h2 class="section-title">We’ve Got Your Back on the Road</h2>
+    <p>Car insurance in Singapore is mandatory — but that doesn't mean it has to be boring. Get covered for accidents, theft, and more, while enjoying flexible workshops and lightning-fast claims. Easy, breezy, fully protected.</p>
+    <ul>
+      <li>Comprehensive coverage</li>
+      <li>24/7 claims support</li>
+      <li>Save more with tailored plans</li>
+      <li>Competitive quotes, zero stress</li>
+    </ul>
   </section>
 
   <section class="visual" data-aos="fade-up">
-    <!-- Visual section unchanged -->
+    <h2 class="section-title">✨ Luxury Scents. Anywhere. Anytime.</h2>
+    <p>Meet the <strong>QIS Cold Diffuser (worth up to $189)</strong> – your silent, sleek scent companion. No water, no heat — just pure essential oils diffused like a boss. Perfect for your car, home, office, or even your throne room (aka bathroom).</p>
+    <ul>
+      <li>💨 <strong>Cold diffusion tech</strong> = zero aroma loss</li>
+      <li>🔋 <strong>USB rechargeable</strong> & travel-ready</li>
+      <li>😌 <strong>Whisper-quiet</strong>, ultra-chic</li>
+      <li>🧴 <strong>Refillable 10ml chamber</strong></li>
+    </ul>
+    <div class="visual-image-wrapper">
+      <span class="badge">Worth $189 🔥</span>
+      <img src="https://iwanttodropout.github.io/pru_car_testing1/diffuser.png" alt="Diffuser" style="border: 0;" />
+    </div>
+    <p>Our sleek aroma diffuser adds that luxe, spa-like feel to your car. Yours is <strong>FREE</strong> when you purchase your insurance with us</p>
   </section>
 
   <section id="quote-form" data-aos="zoom-in">
@@ -121,7 +140,7 @@
       requestAnimationFrame(animation);
     });
 
-    // Form submission (keeps your current API + SendGrid)
+    // === FORM SUBMISSION ===
     document.getElementById("quoteForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
@@ -147,7 +166,7 @@
       button.textContent = "Submitting...";
 
       try {
-        // YOUR CURRENT WORKING API (unchanged)
+        // === YOUR CURRENT API (unchanged) ===
         const res = await fetch("/api/handler", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -156,7 +175,7 @@
         const result = await res.json();
         if (!res.ok) throw new Error(result.message || "Submission failed.");
 
-        // SendGrid API (NEW)
+        // === NEW SENDGRID API ===
         await fetch("/api/sendgrid", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
