@@ -91,9 +91,10 @@
   <section id="quote-form" data-aos="zoom-in">
     <h2 class="section-title">Let’s Get Started!</h2>
     <form id="quoteForm">
+      <!-- Changed types to text to avoid pattern errors -->
       <input type="text" name="name" placeholder="Your Name" required />
-      <input type="tel" name="contact" placeholder="Contact Number" maxlength="8" required title="Enter an 8-digit number starting with 8 or 9" />
-      <input type="email" name="email" placeholder="Email Address" required title="Enter a valid email address" />
+      <input type="text" name="contact" placeholder="Contact Number" maxlength="8" required title="Enter an 8-digit number starting with 8 or 9" />
+      <input type="text" name="email" placeholder="Email Address" required title="Enter a valid email address" />
       <input type="text" name="_gotcha" style="display:none" />
       <p id="errorMsg" style="color: red; display: none; margin-top: 0.5rem;"></p>
       <button id="submitButton" type="submit">Submit</button>
@@ -139,7 +140,7 @@
       requestAnimationFrame(animation);
     });
 
-    // Form submission using your current API (unchanged)
+    // Your existing JS validation & submission
     document.getElementById("quoteForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
@@ -150,7 +151,6 @@
       const errorMsg = document.getElementById("errorMsg");
       const button = document.getElementById("submitButton");
 
-      // Inline validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const contactRegex = /^[89]\d{7}$/;
 
@@ -162,7 +162,6 @@
 
       errorMsg.style.display = "none";
 
-      // Show loading
       button.disabled = true;
       button.classList.add("loading");
       button.textContent = "Submitting...";
@@ -170,9 +169,7 @@
       try {
         const res = await fetch("/api/handler", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, email, contact }),
         });
 
